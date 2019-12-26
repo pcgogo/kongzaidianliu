@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //设置文本框字体大小
 
+    //
+    receivestatus = 0;
+
     //获取图片资源
     green = QPixmap(":/new/prefix1/res/green.bmp");
     gray = QPixmap(":/new/prefix1/res/gray.bmp");
@@ -74,9 +77,9 @@ void MainWindow::openPort()
         m_serialPort->setPortName(ui->comboBox->currentText());//当前选择的串口名字
         m_serialPort->setBaudRate(QSerialPort::Baud9600);//设置波特率和读写方向
         m_serialPort->setDataBits(QSerialPort::Data8);      //数据位为8位
-        m_serialPort->setFlowControl(QSerialPort::NoFlowControl);//无流控制
         m_serialPort->setParity(QSerialPort::NoParity); //无校验位
         m_serialPort->setStopBits(QSerialPort::OneStop); //一位停止位
+        m_serialPort->setFlowControl(QSerialPort::NoFlowControl);//无流控制
         //m_serialPort->setFlowControl(QSerialPort::NoFlowControl);
         //m_serialPort->setReadBufferSize(1024);
 
@@ -120,11 +123,26 @@ void MainWindow::send()
 //串口读取数据函数
 void MainWindow::read()
 {
-    //m_serialPort->waitForReadyRead(10);
+    //m_serialPort->waitForReadyRead(20);
     QByteArray buf = m_serialPort->readAll();
     //ui->edit_receive->setText(buf);
     qDebug()<<buf;
-    ReceiveProcesser(buf);
+    if(buf.contains('T')||buf.contains('D'))
+    {
+        this->receivestatus = 1;
+    }
+    if(this->receivestatus == 1)
+    {
+        sdata.append(buf);
+    }
+    if(buf.contains('W'))
+    {
+        receivestatus = 0;
+        qDebug()<<sdata;
+        ReceiveProcesser(sdata);
+        sdata.clear();
+    }
+
 }
 
 //接受数据协议
