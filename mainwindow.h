@@ -61,6 +61,9 @@ private:
     QTimer timer2;//定时器2
     QTimer timer3;//定时器3
     QTimer timer4;//定时器4
+    QPixmap green;
+    QPixmap gray;
+    QPixmap red;
 };
 
 #endif // MAINWINDOW_H

@@ -26,7 +26,7 @@
    <string>空载电流测试台</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout" rowstretch="1,1,8,0,0,0">
+   <layout class="QGridLayout" name="gridLayout" rowstretch="1,1,8">
     <item row="0" column="1" colspan="2">
      <widget class="QLabel" name="label_title">
       <property name="mouseTracking">
@@ -129,7 +129,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
              </widget>
@@ -139,7 +139,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
              </widget>
@@ -179,7 +179,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
               <property name="readOnly">
@@ -192,7 +192,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
               <property name="readOnly">
@@ -215,12 +215,28 @@
            <property name="title">
             <string>检测结果</string>
            </property>
-           <layout class="QGridLayout" name="gridLayout_12">
+           <layout class="QGridLayout" name="gridLayout_12" rowstretch="1,1">
             <item row="1" column="0">
              <widget class="QTextEdit" name="edit_result1"/>
             </item>
             <item row="0" column="0">
-             <widget class="QTextEdit" name="textEdit_6"/>
+             <widget class="QLabel" name="label_icon1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -269,7 +285,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
              </widget>
@@ -279,7 +295,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
              </widget>
@@ -319,7 +335,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
               <property name="readOnly">
@@ -332,7 +348,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
               <property name="readOnly">
@@ -355,9 +371,25 @@
            <property name="title">
             <string>检测结果</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_8">
+           <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,1">
             <item>
-             <widget class="QTextEdit" name="textEdit_20"/>
+             <widget class="QLabel" name="label_icon2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QTextEdit" name="edit_result2"/>
@@ -409,7 +441,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
              </widget>
@@ -419,7 +451,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
              </widget>
@@ -459,7 +491,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
               <property name="readOnly">
@@ -472,7 +504,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
               <property name="readOnly">
@@ -495,9 +527,25 @@
            <property name="title">
             <string>检测结果</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_9">
+           <layout class="QVBoxLayout" name="verticalLayout_9" stretch="1,1">
             <item>
-             <widget class="QTextEdit" name="textEdit_22"/>
+             <widget class="QLabel" name="label_icon3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QTextEdit" name="edit_result3"/>
@@ -546,7 +594,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
              </widget>
@@ -556,7 +604,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
              </widget>
@@ -596,7 +644,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
               <property name="readOnly">
@@ -609,7 +657,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>50</height>
+                <height>75</height>
                </size>
               </property>
               <property name="readOnly">
@@ -632,9 +680,25 @@
            <property name="title">
             <string>检测结果</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_10">
+           <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,1">
             <item>
-             <widget class="QTextEdit" name="textEdit_24"/>
+             <widget class="QLabel" name="label_icon4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QTextEdit" name="edit_result4"/>
@@ -683,10 +747,6 @@
   <tabstop>edit_mincurrent3</tabstop>
   <tabstop>edit_maxcurrent4</tabstop>
   <tabstop>edit_mincurrent4</tabstop>
-  <tabstop>textEdit_6</tabstop>
-  <tabstop>textEdit_20</tabstop>
-  <tabstop>textEdit_22</tabstop>
-  <tabstop>textEdit_24</tabstop>
   <tabstop>edit_result1</tabstop>
   <tabstop>edit_result2</tabstop>
   <tabstop>edit_result3</tabstop>

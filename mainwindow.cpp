@@ -13,8 +13,20 @@ MainWindow::MainWindow(QWidget *parent) :
     //创建一个QSerialPort串口对象
     m_serialPort = new QSerialPort();
 
+    //设置标题
     QFont font("Microsoft YaHei", 20, 75); //第一个属性是字体（微软雅黑），第二个是大小，第三个是加粗（权重是75）
     ui->label_title->setFont(font);
+
+    //设置文本框字体大小
+
+    //获取图片资源
+    green = QPixmap(":/new/prefix1/res/green.bmp");
+    gray = QPixmap(":/new/prefix1/res/gray.bmp");
+    red = QPixmap(":/new/prefix1/res/red.bmp");
+    ui->label_icon1->setPixmap(gray);
+    ui->label_icon2->setPixmap(gray);
+    ui->label_icon3->setPixmap(gray);
+    ui->label_icon4->setPixmap(gray);
 
     //读取注册表中数据
     readSetting();
@@ -118,18 +130,42 @@ void MainWindow::read()
 //接受数据协议
 bool MainWindow::ReceiveProcesser(QByteArray ba)
 {
-    if('T'==ba.constData()[0] && ba.contains('W'))
+    if('T'==ba.constData()[0] && ba.contains('W'))//收到的数据同时包含指令头和指令尾
     {
         if('A'==ba.constData()[1])          //收到“开始测试”指令
         {
             if ('1'==ba.constData()[2])
+            {
+                ui->edit_maxcurrent1->clear();
+                ui->edit_mincurrent1->clear();
+                ui->edit_result1->clear();
+                ui->label_icon1->setPixmap(gray);
                 timer1.start(1000);         //启动定时器
+            }
             if ('2'==ba.constData()[2])
+            {
+                ui->edit_maxcurrent2->clear();
+                ui->edit_mincurrent2->clear();
+                ui->edit_result2->clear();
+                ui->label_icon2->setPixmap(gray);
                 timer2.start(1000);
+            }
             if ('3'==ba.constData()[2])
+            {
+                ui->edit_maxcurrent3->clear();
+                ui->edit_mincurrent3->clear();
+                ui->edit_result3->clear();
+                ui->label_icon3->setPixmap(gray);
                 timer3.start(1000);         //启动定时器
+            }
             if ('4'==ba.constData()[2])
+            {
+                ui->edit_maxcurrent4->clear();
+                ui->edit_mincurrent4->clear();
+                ui->edit_result4->clear();
+                ui->label_icon4->setPixmap(gray);
                 timer4.start(1000);
+            }
         }
     }
     else if ('D'==ba.constData()[0] && ba.contains('W'))    //收到测试数据
@@ -144,11 +180,13 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
             ui->edit_mincurrent1->setText(QString::number(minI));
             if (judgeCurrent(1, maxI, minI))
             {
-                ui->edit_result1->setText("合格");
+                ui->edit_result1->setHtml("<font color='green' size='24'><green>合格</font>");
+                ui->label_icon1->setPixmap(green);
             }
             else
             {
-                ui->edit_result1->setText("不合格");
+                ui->edit_result1->setHtml("<font color='red' size='24'><red>不合格</font>");
+                ui->label_icon1->setPixmap(red);
             }
         }
         else if ('2'==ba.constData()[1])
@@ -159,11 +197,13 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
             ui->edit_mincurrent2->setText(QString::number(minI));
             if (judgeCurrent(2, maxI, minI))
             {
-                ui->edit_result2->setText("合格");
+                ui->edit_result2->setHtml("<font color='green' size='24'><green>合格</font>");
+                ui->label_icon2->setPixmap(green);
             }
             else
             {
-                ui->edit_result2->setText("不合格");
+                ui->edit_result2->setHtml("<font color='red' size='24'><red>不合格</font>");
+                ui->label_icon2->setPixmap(red);
             }
         }
         else if ('3'==ba.constData()[1])
@@ -174,11 +214,13 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
             ui->edit_mincurrent3->setText(QString::number(minI));
             if (judgeCurrent(3, maxI, minI))
             {
-                ui->edit_result3->setText("合格");
+                ui->edit_result3->setHtml("<font color='green' size='24'><green>合格</font>");
+                ui->label_icon3->setPixmap(green);
             }
             else
             {
-                ui->edit_result3->setText("不合格");
+                ui->edit_result3->setHtml("<font color='red' size='24'><red>不合格</font>");
+                ui->label_icon3->setPixmap(red);
             }
         }
         else if ('4'==ba.constData()[1])
@@ -189,11 +231,13 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
             ui->edit_mincurrent4->setText(QString::number(minI));
             if (judgeCurrent(4, maxI, minI))
             {
-                ui->edit_result4->setText("合格");
+                ui->edit_result4->setHtml("<font color='green' size='24'><green>合格</font>");
+                ui->label_icon4->setPixmap(green);
             }
             else
             {
-                ui->edit_result4->setText("不合格");
+                ui->edit_result4->setHtml("<font color='red' size='24'><red>不合格</font>");
+                ui->label_icon4->setPixmap(red);
             }
         }
         else {
@@ -206,6 +250,7 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
     return true;
 }
 
+//处理从串口接收的数据
 void MainWindow::DataProcess(QByteArray ba, double &max, double &min)   //处理接收的数据
 {
     QByteArray bamax, bamin;
@@ -218,7 +263,8 @@ void MainWindow::DataProcess(QByteArray ba, double &max, double &min)   //处理
     min = bamin.toDouble();
 }
 
-bool MainWindow::judgeCurrent(int n, double max, double min) //判断是否合格
+//判断是否合格的规则
+bool MainWindow::judgeCurrent(int n, double max, double min)
 {
     switch(n)
     {
@@ -236,27 +282,25 @@ bool MainWindow::judgeCurrent(int n, double max, double min) //判断是否合�
 
 }
 
+//定时器 time up槽函数
 void MainWindow::timer1Slot()               //待稳定运行后向下位机发送"采集"指令
 {
     QByteArray sb = "TE1W";
     m_serialPort->write(sb);
     timer1.stop();
 }
-
 void MainWindow::timer2Slot()               //待稳定运行后向下位机发送"采集"指令
 {
     QByteArray sb = "TE2W";
     m_serialPort->write(sb);
     timer2.stop();
 }
-
 void MainWindow::timer3Slot()
 {
     QByteArray sb = "TE3W";
     m_serialPort->write(sb);
     timer3.stop();
 }
-
 void MainWindow::timer4Slot()               //待稳定运行后向下位机发送"采集"指令
 {
     QByteArray sb = "TE4W";
