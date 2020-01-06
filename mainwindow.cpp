@@ -158,7 +158,7 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
                 ui->edit_mincurrent1->clear();
                 ui->edit_result1->clear();
                 ui->label_icon1->setPixmap(gray);
-                timer1.start(1000);         //启动定时器
+                timer1.start(10000);         //启动定时器
             }
             if ('2'==ba.constData()[2])
             {
@@ -166,7 +166,7 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
                 ui->edit_mincurrent2->clear();
                 ui->edit_result2->clear();
                 ui->label_icon2->setPixmap(gray);
-                timer2.start(1000);
+                timer2.start(10000);
             }
             if ('3'==ba.constData()[2])
             {
@@ -174,7 +174,7 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
                 ui->edit_mincurrent3->clear();
                 ui->edit_result3->clear();
                 ui->label_icon3->setPixmap(gray);
-                timer3.start(1000);         //启动定时器
+                timer3.start(10000);         //启动定时器
             }
             if ('4'==ba.constData()[2])
             {
@@ -182,7 +182,7 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
                 ui->edit_mincurrent4->clear();
                 ui->edit_result4->clear();
                 ui->label_icon4->setPixmap(gray);
-                timer4.start(1000);
+                timer4.start(10000);
             }
         }
     }
@@ -192,11 +192,11 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
         //判断是否合格
         if ('1'==ba.constData()[1])
         {
-            double maxI, minI;
-            DataProcess(ba, maxI, minI);
-            ui->edit_maxcurrent1->setText(QString::number(maxI));
-            ui->edit_mincurrent1->setText(QString::number(minI));
-            if (judgeCurrent(1, maxI, minI))
+            double maxI1, minI1;
+            DataProcess(ba, maxI1, minI1);
+            ui->edit_maxcurrent1->setText(QString::number(maxI1));
+            ui->edit_mincurrent1->setText(QString::number(minI1));
+            if (judgeCurrent(1, maxI1, minI1))
             {
                 ui->edit_result1->setHtml("<font color='green' size='24'><green>合格</font>");
                 ui->label_icon1->setPixmap(green);
@@ -209,11 +209,11 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
         }
         else if ('2'==ba.constData()[1])
         {
-            double maxI, minI;
-            DataProcess(ba, maxI, minI);
-            ui->edit_maxcurrent2->setText(QString::number(maxI));
-            ui->edit_mincurrent2->setText(QString::number(minI));
-            if (judgeCurrent(2, maxI, minI))
+            double maxI2, minI2;
+            DataProcess(ba, maxI2, minI2);
+            ui->edit_maxcurrent2->setText(QString::number(maxI2));
+            ui->edit_mincurrent2->setText(QString::number(minI2));
+            if (judgeCurrent(2, maxI2, minI2))
             {
                 ui->edit_result2->setHtml("<font color='green' size='24'><green>合格</font>");
                 ui->label_icon2->setPixmap(green);
@@ -226,11 +226,11 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
         }
         else if ('3'==ba.constData()[1])
         {
-            double maxI, minI;
-            DataProcess(ba, maxI, minI);
-            ui->edit_maxcurrent3->setText(QString::number(maxI));
-            ui->edit_mincurrent3->setText(QString::number(minI));
-            if (judgeCurrent(3, maxI, minI))
+            double maxI3, minI3;
+            DataProcess(ba, maxI3, minI3);
+            ui->edit_maxcurrent3->setText(QString::number(maxI3));
+            ui->edit_mincurrent3->setText(QString::number(minI3));
+            if (judgeCurrent(3, maxI3, minI3))
             {
                 ui->edit_result3->setHtml("<font color='green' size='24'><green>合格</font>");
                 ui->label_icon3->setPixmap(green);
@@ -243,11 +243,11 @@ bool MainWindow::ReceiveProcesser(QByteArray ba)
         }
         else if ('4'==ba.constData()[1])
         {
-            double maxI, minI;
-            DataProcess(ba, maxI, minI);
-            ui->edit_maxcurrent4->setText(QString::number(maxI));
-            ui->edit_mincurrent4->setText(QString::number(minI));
-            if (judgeCurrent(4, maxI, minI))
+            double maxI4, minI4;
+            DataProcess(ba, maxI4, minI4);
+            ui->edit_maxcurrent4->setText(QString::number(maxI4));
+            ui->edit_mincurrent4->setText(QString::number(minI4));
+            if (judgeCurrent(4, maxI4, minI4))
             {
                 ui->edit_result4->setHtml("<font color='green' size='24'><green>合格</font>");
                 ui->label_icon4->setPixmap(green);
@@ -279,6 +279,13 @@ void MainWindow::DataProcess(QByteArray ba, double &max, double &min)   //处理
     //qDebug() <<bamax<<"\t"<<bamin;
     max = bamax.toDouble();
     min = bamin.toDouble();
+    max = adtocurrent(max);
+    min = adtocurrent(min);
+}
+
+double MainWindow::adtocurrent(double ad)//AD采样值转化为电流值
+{
+    return (ad *5 / 4096.0 )/ 0.0313;
 }
 
 //判断是否合格的规则

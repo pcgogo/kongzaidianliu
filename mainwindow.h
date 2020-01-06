@@ -66,6 +66,7 @@ private:
     QPixmap red;
     QByteArray sdata;//下位机数据缓存
     int receivestatus;
+    double adtocurrent(double ad);
 };
 
 #endif // MAINWINDOW_H
